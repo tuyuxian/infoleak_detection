@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-TW">
+
+<head>
+    <!-- Required metadata tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="個資偵探">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>個資偵探</title>
+</head>
+
+<body>
+    </div>
+    <div class="container" id="div1">
+        <h1>個資偵探</h1>
+        <p>一鍵偵測您不想看的隱私權條款是否有漏洞</br>
+            了解您的個人資料是否被進行服務外的第二用途</br>
+            如果喜歡或覺得我們的功能不錯的話歡迎評分</br>
+            (version 1.0 現階段僅能判斷中文條款，英文模型開發中!)
+        </p>
+        <div class="row">
+            <div class="col">
+                <form>
+                    <div class="form-group">
+                        <label for="text-to-detect"><strong>隱私權條款</strong></label>
+                        <textarea class="form-control" id="text-to-detect" rows="10"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mb-2" id="detect">檢測</button></br>
+
+                </form>
+            </div>
+            <div class="col">
+                <div id="loadingIMG" style="display:none;">
+                    <div align="center" style=" position: fixed;
+                    width: 218px;
+                    height: 419px;
+                    margin-left: -109px;
+                    margin-top: -110px;
+                    left: 50%;
+                    top: 50%;">
+                        <img src="static/loading1.gif" /></div>
+                </div>
+                <form>
+                    <div class="form-group" id="detect-text-response">
+                        <label for="detect-result"><strong>有風險內容</strong></label>
+                        <textarea readonly class="form-control" id="detect-result" rows="10"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mb-2" id="feedback"
+                        style="display:none;">評分</button></br>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="div2" style="display:none;">
+        <h1>使用體驗</h1>
+        <p>您的意見都是我們進步的力量！</p>
+        <div class="row">
+            <div class="col">
+                <div class="col">
+                    <div id="loadingIMG1" style="display:none;">
+                        <div align="center" style=" position: fixed;
+                        width: 218px;
+                        height: 819px;
+                        margin-left: -109px;
+                        margin-top: -110px;
+                        left: 50%;
+                        top: 50%;">
+                            <img src="static/loading1.gif" /></div>
+                    </div>
+                    <form>
+                        <div class="form-group" id="index" style="display:none;">
+                            <label for="uuid"><strong>編號</strong></label>
+                            <textarea readonly class="form-control" id="uuid" rows="1" style="display:none;"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="accuracy"><strong>判斷準度</strong></label>
+                            <select id="accuracy">
+                                　<option value="5">5</option>
+                                　<option value="4">4</option>
+                                　<option value="3">3</option>
+                                　<option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="point"><strong>體驗分數</strong></label>
+                            <select id="point">
+                                　<option value="5">5</option>
+                                　<option value="4">4</option>
+                                　<option value="3">3</option>
+                                　<option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="nexttime"><strong>下次還會使用嗎？</strong></label>
+                            <select id="nexttime">
+                                　<option value="1">會</option>
+                                　<option value="0">不會</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="suggestion"><strong>任何意見</strong></label>
+                            <textarea class="form-control" id="suggestion" rows="2"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mb-2" id="push">提交</button></br>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="static/scripts/main5.js"></script>
+        <script>
+            $(function () {
+                $("#push").on("click", function (e) {
+                    e.preventDefault();
+                    var uuid = $('#uuid').val();
+                    var accuracy = $('#accuracy').val();
+                    var point = $('#point').val();
+                    var nexttime = $('#nexttime').val();
+                    var suggestion = $('#suggestion').val();
+                    var data = {
+                        'uuid': uuid,
+                        'accuracy': accuracy,
+                        'point': point,
+                        'nexttime': nexttime,
+                        'suggestion': suggestion,
+                    }
+                    send(data);
+                });
+            });
+            function send(data) {
+                $.ajax({
+                    type: 'get',
+                    url: 'https://script.google.com/macros/s/AKfycbxYPquqCWMTR9ut_jY7zmbAiDljLtJNkAM30Xcb9COzJQjIEPQ/exec',
+                    data: data,
+                    dataType: "json",
+                    success: function (response) {
+                        alert('提交成功！');
+                        $('#push').hide();
+                    },
+                    beforeSend: function () {
+                        $('#loadingIMG1').show();
+                    },
+                    complete: function () {
+                        $('#loadingIMG1').hide();
+                    }
+                });
+            }
+        </script>
+</body>
+
+</html>
