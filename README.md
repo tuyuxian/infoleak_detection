@@ -16,7 +16,7 @@ Here I use Flask as the frame, and MySQL as the database.
 
 ### How To Use
 First, pick up a privacy contract that you are interested in.
-![image]https://github.com/tuyuxian/infoleak_detection/blob/master/picture/step0.png
+![image](https://github.com/tuyuxian/infoleak_detection/blob/master/picture/step0.png)
 
 And copy all the sentences to the area of **隱私權政策** and press **檢測**.  
 
