@@ -2,7 +2,7 @@
 ## Risk Detection of Personal Info Breach（Focus on Privacy Contract）
 
 ### Website
-http://220.130.149.149:8080/
+https://infoleak-detect.com
 
 ### About
 This is a application about the risk of info leak detection of privacy contracts. Using **Bert** as the main NLP model and **flask** as the frame to bulid the website.
